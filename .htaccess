@@ -1,0 +1,15 @@
+RewriteEngine on
+
+# prevent httpd from serving dotfiles (.htaccess, .svn, .git, etc.)
+RedirectMatch 403 /\..*$
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+php_value upload_max_filesize 20M
+php_value post_max_size 40M
+php_value memory_limit 64M
